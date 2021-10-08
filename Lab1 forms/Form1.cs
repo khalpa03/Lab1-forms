@@ -19,8 +19,19 @@ namespace Lab1_forms
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            int n = int.Parse(this.textBox1.Text);
-           
+            int n;
+            try
+            {
+                n = int.Parse(this.textBox1.Text);
+                Properties.Settings.Default.n = n;
+                Properties.Settings.Default.Save();
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Некорректный ввод", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             MessageBox.Show(Logic.getresult(n), "Результат", MessageBoxButtons.OK);
         }
     } 
